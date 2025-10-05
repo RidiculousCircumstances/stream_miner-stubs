@@ -1,19 +1,22 @@
 [build-system]
-requires = ["setuptools>=68", "wheel", "build"]
+requires = ["setuptools>=69", "wheel", "build"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "stream-miner-stubs"
-version = "0.0.2"
+version = "0.0.4"
 description = "PEP 561 type stubs for stream_miner"
 requires-python = ">=3.12"
 classifiers = ["Typing :: Stubs Only"]
 
-# ищем implicit namespace packages (PEP 420), т.к. у тебя __init__.pyi
-[tool.setuptools.packages.find]
-namespaces = true
-include = ["stream_miner*"]
+[tool.setuptools]
+packages = [
+  "stream_miner",
+  "stream_miner.framework",
+  "stream_miner.framework.core",
+  "stream_miner.framework.core.parser",
+  "stream_miner.framework.core.http",
+]
 
-# кладём все .pyi как данные
 [tool.setuptools.package-data]
-"*" = ["*.pyi", "**/*.pyi"]
+"stream_miner" = ["**/*.pyi"]
