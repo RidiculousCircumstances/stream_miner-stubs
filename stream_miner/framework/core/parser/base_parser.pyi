@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from http.client import HTTPResponse
 from pathlib import Path
 from typing import Any, Protocol
 
-from stream_miner.framework.core.http.request_adapter import RequestOptions
+from stream_miner.framework.core.http.request_adapter import RequestOptions, HttpResponse
 
 
 # ── Вспомогательные протоколы (минимум для IDE и тайпчекера) ───────────
@@ -81,4 +80,4 @@ class BaseParser:
             params: dict[str, Any] | None = ...,
             body: Any | None = ...,
             options: RequestOptions | None = ...,
-    ) -> HTTPResponse: ...
+    ) -> HttpResponse: ...
