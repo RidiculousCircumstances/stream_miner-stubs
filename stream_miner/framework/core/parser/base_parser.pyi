@@ -37,6 +37,12 @@ class _ProxyController(Protocol):
 
     async def next(self) -> str: ...
 
+class _ParserCookies:
+    def get_all(self) -> Any: ...
+
+    def set_all(self, cookie_jar: Any) -> None: ...
+
+    def set(self, host: Any, path: Any, name: Any, value: Any) -> None: ...
 
 # ── Публичный контракт BaseParser для клиентов ─────────────────────────
 
@@ -44,6 +50,7 @@ class BaseParser:
     logger: _Logger
     queue: _QueryQueue
     proxy: _ProxyController | None
+    cookies: _ParserCookies
 
     # Класс-константы (если нужны в аннотациях)
     DEFAULT_EXTRA: dict[str, Any]
