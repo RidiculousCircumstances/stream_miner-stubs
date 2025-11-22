@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Protocol
+from typing import Any, Protocol, Literal
 
 from stream_miner.framework.core.http.request_adapter import RequestOptions, HttpResponse
 
@@ -44,9 +44,26 @@ class _ParserCookies:
 
     def set(self, host: Any, path: Any, name: Any, value: Any) -> None: ...
 
+ConfigFieldType = Literal["text", "select", "multiselect"]
+
+class ConfigFieldOption:
+    value: str
+    label: str | None
+
+class ParserConfigField:
+    name: str
+    label: str
+    type: ConfigFieldType = "text"
+    description: str | None
+    placeholder: str | None
+    options: tuple[ConfigFieldOption, ...]
+
 # ── Публичный контракт BaseParser для клиентов ─────────────────────────
 
 class BaseParser:
+    DEFAULT_CONFIG: dict[str, Any]
+    CONFIG_FIELDS: tuple[ParserConfigField, ...]
+
     logger: _Logger
     queue: _QueryQueue
     proxy: _ProxyController | None
